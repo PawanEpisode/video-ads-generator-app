@@ -1,12 +1,72 @@
-# React + Vite
+# Video Ads Generator Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based frontend for the Video Ads Generator application that transforms product URLs into compelling video advertisements.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- URL input and processing
+- Video preview using react-player
+- Modern UI with Tailwind CSS
+- Integration with AI-powered backend services
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React/Next.js
+- Tailwind CSS
+- react-player for video playback
+- Axios for API calls
+
+## Setup Instructions
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Install required packages:
+
+```bash
+npm install react-player axios @heroicons/react
+```
+
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+## Project Structure
+
+```
+frontend/
+├── components/     # Reusable UI components
+├── pages/         # Next.js pages
+├── public/        # Static assets
+├── styles/        # Global styles
+└── utils/         # Utility functions
+```
+
+## API Integration
+
+The frontend communicates with the FastAPI backend running on port 8000. The main endpoints are:
+
+- POST /api/analyze-url - Analyze product URL
+- POST /api/generate-video - Generate video from analyzed content
+- GET /api/video-status - Check video generation status
+
+## Development
+
+- Use `npm run dev` for development
+- Use `npm run build` for production build
+- Use `npm run start` to run production build
