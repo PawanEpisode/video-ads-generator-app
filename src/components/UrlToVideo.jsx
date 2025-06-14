@@ -161,46 +161,30 @@ const UrlToVideo = () => {
                 {videoError}
               </Alert>
             ) : (
-              <video
-                controls
-                width="100%"
-                style={{ maxWidth: "800px", marginTop: "1rem" }}
-                onError={handleVideoError}
-              >
-                <source
-                  src={`http://localhost:8000/videos/${videoPath
-                    .split("/")
-                    .pop()}`}
-                  type="video/mp4"
-                />
-                Your browser does not support the video tag.
-              </video>
+              <div className="flex w-full justify-center items-center rounded-lg ring-inset ring-4 ring-gray-200 p-1">
+                <video
+                  controls
+                  className="w-full h-full max-h-[600px] rounded-lg object-contain"
+                  onError={handleVideoError}
+                >
+                  <source
+                    src={`http://localhost:8000/videos/${videoPath
+                      .split("/")
+                      .pop()}`}
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
             )}
           </Box>
         )}
 
         {result && (
-          <div className="flex flex-col gap-4">
-            <Typography variant="h6" gutterBottom>
-              Product Data
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              Title: {title}
-            </Typography>
-
-            <Typography variant="body1" gutterBottom>
-              Price: {price} {currency}
-            </Typography>
-
-            <Typography variant="body1" gutterBottom>
-              Description: {description}
-            </Typography>
+          <div className="flex flex-col gap-4 py-4">
 
             {script && (
               <>
-                <Typography variant="h6" gutterBottom>
-                  Script
-                </Typography>
                 <MarkdownRenderer markdown={script.content} />
               </>
             )}
