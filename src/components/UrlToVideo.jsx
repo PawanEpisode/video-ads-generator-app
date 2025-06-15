@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import MarkdownRenderer from "./MarkdownRenderer";
+import ReactVideoPlayer from "./ReactVideoPlayer";
 
 const UrlToVideo = () => {
   const [url, setUrl] = useState("");
@@ -162,10 +163,25 @@ const UrlToVideo = () => {
               </Alert>
             ) : (
               <div className="flex w-full justify-center items-center rounded-lg ring-inset ring-4 ring-gray-200 p-1">
-                <video
+                <ReactVideoPlayer
+                  allowDownload
+                  videoURL={`http://localhost:8000/videos/${videoPath
+                    .split("/")
+                    .pop()}`}
+                  className="w-full h-full max-h-[600px] rounded-lg object-contain"
+                />
+                {/* <video
                   controls
+                  autoPlay={false}
+                  muted={false}
+                  playsInline
+                  preload="auto"
                   className="w-full h-full max-h-[600px] rounded-lg object-contain"
                   onError={handleVideoError}
+                  onLoadedMetadata={(e) => {
+                    // Set initial volume to 1 (100%)
+                    e.target.volume = 1;
+                  }}
                 >
                   <source
                     src={`http://localhost:8000/videos/${videoPath
@@ -174,7 +190,7 @@ const UrlToVideo = () => {
                     type="video/mp4"
                   />
                   Your browser does not support the video tag.
-                </video>
+                </video> */}
               </div>
             )}
           </Box>
@@ -182,7 +198,6 @@ const UrlToVideo = () => {
 
         {result && (
           <div className="flex flex-col gap-4 py-4">
-
             {script && (
               <>
                 <MarkdownRenderer markdown={script.content} />
