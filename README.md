@@ -48,10 +48,11 @@ The frontend is built with React and provides a user-friendly interface for gene
 
    ```bash
    # Create .env file
-   touch .env.local
+   touch .env
 
-   # Add the following variables to .env.local
-   NEXT_PUBLIC_API_URL=http://localhost:8000
+   # Add the following variables to .env
+   # This is the base URL bacckend is running on -
+   VITE_PUBLIC_API_URL = http://localhost:8000
    ```
 
 ### Running the Application
@@ -63,7 +64,7 @@ The frontend is built with React and provides a user-friendly interface for gene
    ```
 
 2. **Verify Installation**
-   - Open your browser and navigate to `http://localhost:3000`
+   - Open your browser and navigate to `http://localhost:5173`
    - You should see the application's main page
    - The page should be responsive and show the URL input form
 
@@ -73,7 +74,7 @@ The frontend is built with React and provides a user-friendly interface for gene
 
    - Change the port number:
      ```bash
-     npm run dev -- -p 3001
+     npm run dev -- -p 5174
      ```
 
 2. **Node Version Issues**

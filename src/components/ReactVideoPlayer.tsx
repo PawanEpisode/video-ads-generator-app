@@ -6,9 +6,10 @@ type IProps = {
   allowDownload?: boolean;
   className?: string;
   allowPictureInPicture?: boolean;
+  onError?: (error: Error) => void;
 };
 
-const ReactVideoPlayer = ({ videoURL, allowDownload = false, allowPictureInPicture = true, className }: IProps) => {
+const ReactVideoPlayer = ({ videoURL, allowDownload = false, allowPictureInPicture = true, className, onError }: IProps) => {
   return (
     <div className={`relative ${className}`} style={{ position: 'relative', paddingTop: '56.25%' }}>
       <ReactPlayer
@@ -25,6 +26,7 @@ const ReactVideoPlayer = ({ videoURL, allowDownload = false, allowPictureInPictu
             },
           },
         }}
+        onError={onError}
       />
     </div>
   );

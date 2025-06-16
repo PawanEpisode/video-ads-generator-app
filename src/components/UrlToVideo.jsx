@@ -13,6 +13,8 @@ import axios from "axios";
 import MarkdownRenderer from "./MarkdownRenderer";
 import ReactVideoPlayer from "./ReactVideoPlayer";
 
+const BASE_URL = import.meta.env.VITE_PUBLIC_API_URL;
+
 const UrlToVideo = () => {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
@@ -33,7 +35,7 @@ const UrlToVideo = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/url-to-video/process",
+        `${BASE_URL}/api/v1/url-to-video/process`,
         {
           url,
           generate_video: true,
@@ -59,14 +61,14 @@ const UrlToVideo = () => {
   const pollVideoStatus = async (jobId) => {
     try {
       const response = await axios.get(
-        `http://localhost:8000/api/v1/url-to-video/video-status/${jobId}`
+        `${BASE_URL}/api/v1/url-to-video/video-status/${jobId}`
       );
       setVideoStatus(response.data);
 
       if (response.data.status === "completed") {
         // Get the video path
         const videoResponse = await axios.get(
-          `http://localhost:8000/api/v1/url-to-video/video/${jobId}`
+          `${BASE_URL}/api/v1/url-to-video/video/${jobId}`
         );
         setVideoPath(videoResponse.data.video_path);
       } else if (response.data.status === "failed") {
@@ -164,33 +166,13 @@ const UrlToVideo = () => {
             ) : (
               <div className="flex w-full justify-center items-center rounded-lg ring-inset ring-4 ring-gray-200 p-1">
                 <ReactVideoPlayer
+                  onError={handleVideoError}
                   allowDownload
-                  videoURL={`http://localhost:8000/videos/${videoPath
+                  videoURL={`${BASE_URL}/videos/${videoPath
                     .split("/")
                     .pop()}`}
                   className="w-full h-full max-h-[600px] rounded-lg object-contain"
                 />
-                {/* <video
-                  controls
-                  autoPlay={false}
-                  muted={false}
-                  playsInline
-                  preload="auto"
-                  className="w-full h-full max-h-[600px] rounded-lg object-contain"
-                  onError={handleVideoError}
-                  onLoadedMetadata={(e) => {
-                    // Set initial volume to 1 (100%)
-                    e.target.volume = 1;
-                  }}
-                >
-                  <source
-                    src={`http://localhost:8000/videos/${videoPath
-                      .split("/")
-                      .pop()}`}
-                    type="video/mp4"
-                  />
-                  Your browser does not support the video tag.
-                </video> */}
               </div>
             )}
           </Box>
