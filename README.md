@@ -50,7 +50,7 @@ The frontend is built with React and provides a user-friendly interface for gene
    # Create .env file
    touch .env
 
-   # Add the following variables to .env
+   # Add the following variables to `.env` from `.env.example`
    # This is the base URL bacckend is running on -
    VITE_PUBLIC_API_URL = http://localhost:8000
    ```
